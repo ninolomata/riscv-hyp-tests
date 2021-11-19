@@ -33,7 +33,8 @@ endif
 TARGET := $(build_dir)/rvh_test
 c_srcs := main.c page_tables.c rvh_test.c interrupt_tests.c\
 	translation_tests.c	test_register.c virtual_instruction.c\
-	hfence_tests.c wfi_tests.c tinst_tests.c\
+	hfence_tests.c wfi_tests.c tinst_tests.c smepmp_tests.c\
+	pmp.c\
 	$(addprefix $(plat_dir)/, $(notdir $(wildcard $(plat_dir)/*.c)))
 asm_srcs := boot.S handlers.S  $(wildcard $(plat_dir)/*.S)
 ld_file:=linker.ld
@@ -66,12 +67,12 @@ $(TARGET).elf: $(objs) $(ld_file_final)
 $(build_dir)/%.o: %.[c,S] $(build_dir)/%.d
 	$(CC) $(CFLAGS) -c $< -o $@
 
-$(build_dir)/%.d: %.[c,S,ld] 
-	$(CC) $(GENERIC_FLAGS) -MM -MT "$(patsubst %.d, %.o, $@) $@" -MF $@ $<  
+$(build_dir)/%.d: %.[c,S,ld]
+	$(CC) $(GENERIC_FLAGS) -MM -MT "$(patsubst %.d, %.o, $@) $@" -MF $@ $<
 
 $(ld_file_final): $(ld_file)
 	$(CC) $(CFLAGS) -E -x assembler-with-cpp $< | grep "^[^#;]" > $@
-	
+
 .SECONDEXPANSION:
 
 $(objs) $(deps): | $$(@D)/

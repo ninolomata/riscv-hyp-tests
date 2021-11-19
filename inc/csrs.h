@@ -30,6 +30,15 @@
 #define CSR_MTINST 0x34A
 #define CSR_MTVAL2 0x34B
 
+
+#define CSR_MSECCFG 0x747
+#define MSECCFG_MML_OFF     (0)
+#define MSECCFG_MML         (1ULL << MSECCFG_MML_OFF)
+#define MSECCFG_MMWP_OFF    (1)
+#define MSECCFG_MMWP        (1ULL << MSECCFG_MMWP_OFF)
+#define MSECCFG_RLB_OFF     (2)
+#define MSECCFG_RLB         (1ULL << MSECCFG_RLB_OFF)
+
 #define STVEC_MODE_OFF (0)
 #define STVEC_MODE_LEN (2)
 #define STVEC_MODE_MSK BIT_MASK(STVEC_MODE_OFF, STVEC_MODE_LEN)
@@ -192,7 +201,7 @@
 #define HSTATUS_VSXL_64 (2ULL << HSTATUS_VSXL_OFF)
 
 #define HCOUNTEREN_CY   (1ULL << 0)
-#define HCOUNTEREN_TM   (1ULL << 1)   
+#define HCOUNTEREN_TM   (1ULL << 1)
 #define HCOUNTEREN_IR   (1ULL << 2)
 #define HCOUNTEREN(N)   (1ULL << (N))
 

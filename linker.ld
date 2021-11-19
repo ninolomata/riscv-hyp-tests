@@ -15,13 +15,10 @@ SECTIONS {
 	.boot : {
 		*(.boot)
 	} 
-
+	__text_begin = .;
 	.text :  {
 		*(.text)
-	} 
-
-    . = ALIGN(0x1000);
-    .tohost : { *(.tohost) }
+	}
 
 	.rodata :  {
 		*(.rodata)
@@ -33,7 +30,12 @@ SECTIONS {
         _test_table_end = .;
 	}
     _test_table_size = (_test_table_end - _test_table) / 8;
-	
+	__text_end = .;
+
+	__data_begin = .;
+	. = ALIGN(0x1000);
+    .tohost : { *(.tohost) }
+
 	.data : {
 		*(.data)
 	}
