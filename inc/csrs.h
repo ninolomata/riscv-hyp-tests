@@ -2,6 +2,8 @@
 #ifndef CSRS_H
 #define CSRS_H
 
+#define CSR_SENVCFG 0x10A
+
 #define CSR_VSSTATUS 0x200
 #define CSR_VSIE 0x204
 #define CSR_VSTVEC 0x205
@@ -26,9 +28,12 @@
 #define CSR_HTINST 0x64A
 #define CSR_HGATP 0x680
 #define CSR_HGEIP 0xE07
+#define CSR_HENVCFG 0x60A
 
 #define CSR_MTINST 0x34A
 #define CSR_MTVAL2 0x34B
+#define CSR_MCONFIGPTR 0xF15
+#define CSR_MENVCFG 0x30A
 
 #define STVEC_MODE_OFF (0)
 #define STVEC_MODE_LEN (2)

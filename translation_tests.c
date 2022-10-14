@@ -14,6 +14,22 @@ static inline void touch(uintptr_t addr){
     touchwrite(addr);
 }
 
+bool test_hyp(){
+    TEST_START();
+    check_csr_wrrd("menvcfg", CSR_MENVCFG, (uint64_t)-1, 0x1);
+    check_csr_wrrd("senvcfg", CSR_SENVCFG, (uint64_t)-1, 0x1);
+    check_csr_wrrd("henvcfg", CSR_HENVCFG, (uint64_t)-1, 0x1);
+    uint64_t configptr = CSRR(CSR_MCONFIGPTR);
+    TEST_ASSERT("config ptr = 0", (configptr == 0));
+    TEST_SETUP_EXCEPT();
+    CSRW(CSR_MCONFIGPTR,0x1);
+    TEST_ASSERT(
+        "no writes to configptr", 
+        excpt.triggered == true
+    );
+    TEST_END();
+}
+
 bool two_stage_translation(){
     
     TEST_START();
