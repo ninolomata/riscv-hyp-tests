@@ -148,9 +148,10 @@ bool second_stage_only_translation(){
     bool check1 = read64(vaddr1) == 0x11;
     bool check2 = read64(vaddr2) == 0x22;
     TEST_ASSERT("vs gets right values", excpt.triggered == false && check1 && check2);
-
+    goto_priv(PRIV_HS);
     hpt_switch();
-    sfence();
+    hfence();
+    goto_priv(PRIV_VS);
     TEST_SETUP_EXCEPT();
     check1 = read64(vaddr1) == 0x22;
     check2 = read64(vaddr2) == 0x11;   
@@ -309,7 +310,7 @@ bool m_and_hs_using_vs_access(){
     TEST_ASSERT("hs hlvxwu on vs-level non-exec page leads to lpf",
         excpt.triggered == true && 
         excpt.cause == CAUSE_LPF  && 
-        excpt.gva == false &&
+        excpt.gva == true &&
         excpt.xpv == false
     );
 
@@ -375,6 +376,7 @@ bool m_and_hs_using_vs_access(){
     goto_priv(PRIV_HS);
     set_prev_priv(PRIV_VS);
     TEST_SETUP_EXCEPT();
+    hfence();
     val = hlvd(vaddr);
     TEST_ASSERT("hs hlvd of xo vs page leads to exception",
         excpt.triggered == true
