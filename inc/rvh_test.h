@@ -46,31 +46,31 @@
 #endif
 
 #if LOG_LEVEL >= LOG_INFO
-# define INFO(str...)	{ printf(str); printf("\n"); }
+# define INFO(str...)	{ printf(str); printf("\r\n"); }
 #else
 # define INFO(...)
 #endif
 
 #if LOG_LEVEL >= LOG_DETAIL
-# define DETAIL(str...)	{ printf(str); printf("\n"); }
+# define DETAIL(str...)	{ printf(str); printf("\r\n"); }
 #else
 # define DETAIL(...)
 #endif
 
 #if LOG_LEVEL >= LOG_WARNING
-# define WARN(str...)	{ printf(CYEL "WARNING: " CDFLT str); printf("\n"); }
+# define WARN(str...)	{ printf(CYEL "WARNING: " CDFLT str); printf("\r\n"); }
 #else
 # define WARN(...)
 #endif
 
 #if LOG_LEVEL >= LOG_VERBOSE
-# define VERBOSE(str...)	{ printf("VERBOSE: " str); printf("\n"); }
+# define VERBOSE(str...)	{ printf("VERBOSE: " str); printf("\r\n"); }
 #else
 # define VERBOSE(...)
 #endif
 
 #if LOG_LEVEL >= LOG_DEBUG
-# define DEBUG(str...)	{ printf("DEBUG: " str); printf("\n"); }
+# define DEBUG(str...)	{ printf("DEBUG: " str); printf("\r\n"); }
 #else
 # define DEBUG(...)
 #endif
@@ -110,7 +110,7 @@ extern size_t test_table_size;
     const char* __test_name = __func__;\
     bool test_status = true;\
     if(LOG_LEVEL >= LOG_INFO) printf(CBLU "%-70s" CDFLT, __test_name);\
-    if(LOG_LEVEL >= LOG_DETAIL) printf("\n");
+    if(LOG_LEVEL >= LOG_DETAIL) printf("\r\n");
 
 #define TEST_REGISTER(test)\
     bool test();\
@@ -124,8 +124,8 @@ extern size_t test_table_size;
         for(int i = line_size; i < size; i+=line_size)\
             printf(CBLU "\n\t%-70.*s" CDFLT, line_size, &test[i]);\
         printf("%s" CDFLT, (cond) ? CGRN "PASSED" : CRED "FAILED");\
-        if(!(cond)) { printf("\n\t("); printf(""__VA_ARGS__); printf(")"); }\
-        printf("\n");\
+        if(!(cond)) { printf("\r\n\t("); printf(""__VA_ARGS__); printf(")"); }\
+        printf("\r\n");\
     }\
     test_status = test_status && cond;\
     /*if(!test_status) goto failed; /**/\
