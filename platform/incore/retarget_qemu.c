@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <sys/stat.h>
 #include <sys/errno.h>
-#include "8250_uart.h"
+#include "uart.h"
 
 int _read(int file, char *ptr, int len)
 {
