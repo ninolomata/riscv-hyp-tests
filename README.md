@@ -32,7 +32,7 @@ cd <path-to-chromite>/bin
 ```
 Then run the verilated model of the core, indicating the .elf output file of the compiled aplication:
 ```
-./chromite_core +elf=<*path-to-riscv-hyp-tests*>/build/incore/rvh_test.elf
+./chromite_core +elf=<path-to-riscv-hyp-tests>/build/incore/rvh_test.elf
 ```
 As referred in the Chromite documentation [notes](https://chromite.readthedocs.io/en/latest/getting_started.html#notes-on-simulation), the simulation model of the core contains a simple UART, which uses the putchar function defined in the incore platform folder. 
 
