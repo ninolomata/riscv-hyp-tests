@@ -6,7 +6,7 @@ The following guide explains how to simulate the test application on a RISC-V co
 
 It is assumed that you have already built the Chromite core and created the corresponding verilated executable, which is simulates the core's behavior. If not, you must do it following this [guide](https://chromite.readthedocs.io/en/latest/getting_started.html#).
 
-After performing the required steps, you should have the following files in the **`bin`** folder of your Chromite directory:
+After performing the required steps, you should have the following files in the `bin` folder of your Chromite directory:
 - ***chromite_core***: The verilated executable file
 - ***boot.mem***: BootROM initialization file
 
