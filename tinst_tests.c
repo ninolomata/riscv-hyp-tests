@@ -157,7 +157,7 @@ bool tinst_tests(){
     value = lr_w(vaddr_f);
     TEST_ASSERT("correct tinst when executing a lr.w which results in a lpf",
         excpt.triggered == true && 
-        excpt.cause == CAUSE_LPF &&
+        excpt.cause == CAUSE_SPF &&
         TINST_CHECK(TINST_AMO)
     );
 
