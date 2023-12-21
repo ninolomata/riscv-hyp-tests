@@ -118,6 +118,7 @@ extern size_t test_table_size;
     static test_func_t test ## func __attribute__((section(".test_table"), used)) = test;
 
 #define TEST_ASSERT(test, cond, ...) {\
+    asm volatile ("fence iorw, iorw" :::"memory"); \
     if(LOG_LEVEL >= LOG_DETAIL){\
         size_t line_size = 80;\
         size_t size = strlen(test);\
