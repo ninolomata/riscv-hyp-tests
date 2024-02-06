@@ -155,7 +155,9 @@ bool tinst_tests(){
 
     TEST_SETUP_EXCEPT();
     value = lr_w(vaddr_f);
-    TEST_ASSERT("correct tinst when executing a lr.w which results in a lpf",
+    // Warning: this is not spec compliant. LR.w should throw a LPF.
+    // This is a temporary fix to work with CVA6.
+    TEST_ASSERT("correct tinst when executing a lr.w which results in a spf",
         excpt.triggered == true && 
         excpt.cause == CAUSE_SPF &&
         TINST_CHECK(TINST_AMO)
